@@ -222,3 +222,172 @@ class Dog extends Animal {
 
 let dogs = new Dog('狗子')
 dogs.eat();
+
+
+//静态属性静态方法
+
+// function Persons22(){
+//     this.run = function(){
+//         //实例方法
+//     }
+// }
+
+// Persons22.run = function(){
+//     // 静态方法
+//     console.log('我是静态方法!');
+
+// }
+// Persons22.run();
+
+class Personss {
+    public name: string
+    constructor(name) {
+        this.name = name
+    }
+    run(){
+        console.log('我是一个构造函数!!!');
+    }
+    work(){
+        console.log('我是一个在工作的人类!!');
+    }
+    static print(){
+        // 静态方法只能调用静态属性
+        console.log('我是静态方法!111111');
+        
+    }
+}
+
+let tempP = new Personss('zhangs')
+tempP.run();
+Personss.print();
+// 继承,多态   父类定义一个方法不去实现,让继承他的子类去实现,每一个子类有不同的实现
+//多态也是继承的一种
+
+class Allanimal{
+    name:string
+    constructor(name:string){
+        this.name = name
+    }
+    eat(){
+        console.log('吃的方法!!');
+        
+    }
+}
+
+class AllDog extends Allanimal{
+
+    constructor(name:string){
+        super(name);//将属性传递给父类
+    }
+    eat(): void {
+        console.log(this.name + '吃肉!!!');
+    }
+}
+
+class AllCat extends Allanimal{
+
+    constructor(name:string){
+        super(name);//将属性传递给父类
+    }
+    eat(): void {
+        console.log(this.name + '吃老鼠!!!');
+    }
+}
+
+
+// 抽象方法 用abstract 关键字定义抽象类抽象方法,抽象类中的抽象方法不包含具体的实现并且必须在派生类中实现
+// 抽象放只能放在抽象类中,抽象类不能直接被实例化,定义标准
+
+abstract class AbsAnimall {
+    abstract eat():void;
+}
+
+class AbsDog extends AbsAnimall{
+    // 实现父类的抽象方法
+    eat(): void {
+        throw new Error("Method not implemented.");
+    }
+}
+
+// 接口
+//接口是一种规范的定义,定义了行为规范限制的作用
+
+
+// 属性接口 对json的约束
+
+// function printlabel(label?:string):void{
+//     console.log('这是一个接口的例子!!');
+    
+// }
+
+// printlabel()
+function printlabel(label?:string):void{
+    console.log('这是一个接口的例子!!');
+    
+}
+
+printlabel() 
+
+
+//对批量方法传入参数约束
+
+interface FullName {
+    firstNmme:string;
+    secondName:string
+}
+
+function printFullname(name:FullName){
+    console.log(name);
+    
+}
+// 
+let objs = {
+    age:20,
+    firstNmme:'张三',
+    secondName:'李四'
+}
+printFullname(objs)
+
+// 接口可选属性
+
+interface FullNamess {
+    firstname?:string;
+    secondname?:string;
+}
+function getInfos1(value:FullNamess){
+    console.log(value);
+    
+}
+
+getInfos1({
+    firstname:'王五1',
+})
+
+
+//模拟接口
+// 参数类型的接口
+interface Config {
+    type:string;
+    url:string;
+    data?:string;
+    dataType:string
+}
+function ajax(config:Config){
+
+}
+
+// 函数类型的接口 对函数的返回值的约束
+// 加密的函数类型接口
+interface encrypt {
+    (key:string,value:string):string;
+}
+
+// 函数的接口
+let md5:encrypt = function(key:string,value:string):string{
+    return ''
+}
+
+
+
+// 可索引接口,数组,对象的约束
+

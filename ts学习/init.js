@@ -201,3 +201,109 @@ var Dog = /** @class */ (function (_super) {
 }(Animal));
 var dogs = new Dog('狗子');
 dogs.eat();
+//静态属性静态方法
+// function Persons22(){
+//     this.run = function(){
+//         //实例方法
+//     }
+// }
+// Persons22.run = function(){
+//     // 静态方法
+//     console.log('我是静态方法!');
+// }
+// Persons22.run();
+var Personss = /** @class */ (function () {
+    function Personss(name) {
+        this.name = name;
+    }
+    Personss.prototype.run = function () {
+        console.log('我是一个构造函数!!!');
+    };
+    Personss.prototype.work = function () {
+        console.log('我是一个在工作的人类!!');
+    };
+    Personss.print = function () {
+        // 静态方法只能调用静态属性
+        console.log('我是静态方法!111111');
+    };
+    return Personss;
+}());
+var tempP = new Personss('zhangs');
+tempP.run();
+Personss.print();
+// 继承,多态   父类定义一个方法不去实现,让继承他的子类去实现,每一个子类有不同的实现
+//多态也是继承的一种
+var Allanimal = /** @class */ (function () {
+    function Allanimal(name) {
+        this.name = name;
+    }
+    Allanimal.prototype.eat = function () {
+        console.log('吃的方法!!');
+    };
+    return Allanimal;
+}());
+var AllDog = /** @class */ (function (_super) {
+    __extends(AllDog, _super);
+    function AllDog(name) {
+        return _super.call(this, name) || this;
+    }
+    AllDog.prototype.eat = function () {
+        console.log(this.name + '吃肉!!!');
+    };
+    return AllDog;
+}(Allanimal));
+var AllCat = /** @class */ (function (_super) {
+    __extends(AllCat, _super);
+    function AllCat(name) {
+        return _super.call(this, name) || this;
+    }
+    AllCat.prototype.eat = function () {
+        console.log(this.name + '吃老鼠!!!');
+    };
+    return AllCat;
+}(Allanimal));
+// 抽象方法 用abstract 关键字定义抽象类抽象方法,抽象类中的抽象方法不包含具体的实现并且必须在派生类中实现
+// 抽象放只能放在抽象类中,抽象类不能直接被实例化,定义标准
+var AbsAnimall = /** @class */ (function () {
+    function AbsAnimall() {
+    }
+    return AbsAnimall;
+}());
+var AbsDog = /** @class */ (function (_super) {
+    __extends(AbsDog, _super);
+    function AbsDog() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    // 实现父类的抽象方法
+    AbsDog.prototype.eat = function () {
+        throw new Error("Method not implemented.");
+    };
+    return AbsDog;
+}(AbsAnimall));
+// 接口
+//接口是一种规范的定义,定义了行为规范限制的作用
+// 属性接口 对json的约束
+// function printlabel(label?:string):void{
+//     console.log('这是一个接口的例子!!');
+// }
+// printlabel()
+function printlabel(label) {
+    console.log('这是一个接口的例子!!');
+}
+printlabel();
+function printFullname(name) {
+    console.log(name);
+}
+// 
+var objs = {
+    age: 20,
+    firstNmme: '张三',
+    secondName: '李四'
+};
+printFullname(objs);
+function getInfos1(value) {
+    console.log(value);
+}
+getInfos1({
+    firstname: '王五1'
+});
