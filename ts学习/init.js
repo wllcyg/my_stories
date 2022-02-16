@@ -307,3 +307,67 @@ function getInfos1(value) {
 getInfos1({
     firstname: '王五1'
 });
+function ajax(config) {
+}
+// 函数的接口
+var md5 = function (key, value) {
+    return '';
+};
+var arrs1 = ['123', '2323'];
+console.log(arrs1[0]);
+var MyDogss = /** @class */ (function () {
+    function MyDogss(name) {
+        this.name = name;
+    }
+    MyDogss.prototype.eat = function (str) {
+        console.log(str);
+        console.log(this.name);
+    };
+    return MyDogss;
+}());
+var NewPersons = /** @class */ (function () {
+    function NewPersons() {
+    }
+    NewPersons.prototype.work = function () {
+        throw new Error("Method not implemented.");
+    };
+    NewPersons.prototype.eat = function () {
+        throw new Error("Method not implemented.");
+    };
+    return NewPersons;
+}());
+// 泛型 ,解决类,接口,方法的重用性,支持不特定数据类型
+//定义可以返回多个类型的方法,传入什么返回什么,支持不特定数据类型
+function getTdata(value) {
+    return value;
+}
+// 泛型类 :最小堆算法同时支持范湖数字和字符串,通过泛型实现
+var MinClSSA = /** @class */ (function () {
+    function MinClSSA() {
+        this.list = [];
+    }
+    MinClSSA.prototype.add = function (value) {
+        this.list.push(value);
+    };
+    MinClSSA.prototype.min = function () {
+        var minnum = this.list[0];
+        this.list.forEach(function (e) {
+            if (minnum > e) {
+                minnum = e;
+            }
+        });
+        return minnum;
+    };
+    return MinClSSA;
+}());
+var m23 = new MinClSSA(); // 定义化类,定义类的返回值
+//实现泛型接口
+var getAlldata = function (value) {
+    return value;
+};
+function newGetDatas(value) {
+    console.log(value);
+    return value;
+}
+var newGetdatas = newGetDatas;
+newGetDatas(23);

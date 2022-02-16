@@ -244,16 +244,16 @@ class Personss {
     constructor(name) {
         this.name = name
     }
-    run(){
+    run() {
         console.log('我是一个构造函数!!!');
     }
-    work(){
+    work() {
         console.log('我是一个在工作的人类!!');
     }
-    static print(){
+    static print() {
         // 静态方法只能调用静态属性
         console.log('我是静态方法!111111');
-        
+
     }
 }
 
@@ -263,20 +263,20 @@ Personss.print();
 // 继承,多态   父类定义一个方法不去实现,让继承他的子类去实现,每一个子类有不同的实现
 //多态也是继承的一种
 
-class Allanimal{
-    name:string
-    constructor(name:string){
+class Allanimal {
+    name: string
+    constructor(name: string) {
         this.name = name
     }
-    eat(){
+    eat() {
         console.log('吃的方法!!');
-        
+
     }
 }
 
-class AllDog extends Allanimal{
+class AllDog extends Allanimal {
 
-    constructor(name:string){
+    constructor(name: string) {
         super(name);//将属性传递给父类
     }
     eat(): void {
@@ -284,9 +284,9 @@ class AllDog extends Allanimal{
     }
 }
 
-class AllCat extends Allanimal{
+class AllCat extends Allanimal {
 
-    constructor(name:string){
+    constructor(name: string) {
         super(name);//将属性传递给父类
     }
     eat(): void {
@@ -299,10 +299,10 @@ class AllCat extends Allanimal{
 // 抽象放只能放在抽象类中,抽象类不能直接被实例化,定义标准
 
 abstract class AbsAnimall {
-    abstract eat():void;
+    abstract eat(): void;
 }
 
-class AbsDog extends AbsAnimall{
+class AbsDog extends AbsAnimall {
     // 实现父类的抽象方法
     eat(): void {
         throw new Error("Method not implemented.");
@@ -317,77 +317,172 @@ class AbsDog extends AbsAnimall{
 
 // function printlabel(label?:string):void{
 //     console.log('这是一个接口的例子!!');
-    
+
 // }
 
 // printlabel()
-function printlabel(label?:string):void{
+function printlabel(label?: string): void {
     console.log('这是一个接口的例子!!');
-    
+
 }
 
-printlabel() 
+printlabel()
 
 
 //对批量方法传入参数约束
 
 interface FullName {
-    firstNmme:string;
-    secondName:string
+    firstNmme: string;
+    secondName: string
 }
 
-function printFullname(name:FullName){
+function printFullname(name: FullName) {
     console.log(name);
-    
+
 }
 // 
 let objs = {
-    age:20,
-    firstNmme:'张三',
-    secondName:'李四'
+    age: 20,
+    firstNmme: '张三',
+    secondName: '李四'
 }
 printFullname(objs)
 
 // 接口可选属性
 
 interface FullNamess {
-    firstname?:string;
-    secondname?:string;
+    firstname?: string;
+    secondname?: string;
 }
-function getInfos1(value:FullNamess){
+function getInfos1(value: FullNamess) {
     console.log(value);
-    
+
 }
 
 getInfos1({
-    firstname:'王五1',
+    firstname: '王五1',
 })
 
 
 //模拟接口
 // 参数类型的接口
 interface Config {
-    type:string;
-    url:string;
-    data?:string;
-    dataType:string
+    type: string;
+    url: string;
+    data?: string;
+    dataType: string
 }
-function ajax(config:Config){
+function ajax(config: Config) {
 
 }
 
 // 函数类型的接口 对函数的返回值的约束
 // 加密的函数类型接口
 interface encrypt {
-    (key:string,value:string):string;
+    (key: string, value: string): string;
 }
 
 // 函数的接口
-let md5:encrypt = function(key:string,value:string):string{
+let md5: encrypt = function (key: string, value: string): string {
     return ''
 }
 
 
 
 // 可索引接口,数组,对象的约束
+//对数组和对象约束约束
+interface UserArr {
+    [index: number]: string
+}
+let arrs1: UserArr = ['123', '2323']
+console.log(arrs1[0]);
 
+// 类类型接口,对类的约束与抽象类相似
+
+interface AnimalInter {
+    name: string;
+    eat(str: string): void;
+}
+
+class MyDogss implements AnimalInter {
+    //实现这个接口
+    name: string;
+    constructor(name:string){
+        this.name = name;
+    }
+    eat(str: string): void {
+        console.log(str);
+        console.log(this.name);
+    }
+}
+
+// 接口扩展,继承接口
+interface MyAnimaless {
+    eat():void;
+}
+interface MyChilds extends MyAnimaless {
+    work():void;
+}
+
+class NewPersons implements MyChilds{
+    work(): void {
+        throw new Error("Method not implemented.");
+    }
+    eat(): void {
+        throw new Error("Method not implemented.");
+    }
+}
+
+
+// 泛型 ,解决类,接口,方法的重用性,支持不特定数据类型
+
+//定义可以返回多个类型的方法,传入什么返回什么,支持不特定数据类型
+
+function getTdata<T>(value:T):T{
+    return value;
+}
+
+// 泛型类 :最小堆算法同时支持范湖数字和字符串,通过泛型实现
+
+class MinClSSA<T>{
+    public list:T[]=[];
+    add(value:T):void{
+        this.list.push(value);
+    }
+    min():T{
+        var minnum = this.list[0]
+        this.list.forEach(e => {
+            if (minnum > e) {
+                minnum = e
+            }
+        })
+        return minnum;
+    }
+}
+
+
+var m23 = new MinClSSA<number>();// 定义化类,定义类的返回值
+
+//1. 泛型接口
+interface ConfigFn {
+    <T>(value:T):T;
+}
+//实现泛型接口
+let getAlldata:ConfigFn = function<T>(value:T):T{
+    return value;
+}
+//2. 另一种泛型接口定义
+
+interface ConfigNewFn<T> {
+    (value:T):T;
+}
+
+function newGetDatas<T>(value:T):T{
+    console.log(value);
+    
+    return value
+}
+
+let newGetdatas:ConfigNewFn<string> = newGetDatas;
+
+newGetdatas('23');
