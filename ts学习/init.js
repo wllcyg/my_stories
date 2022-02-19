@@ -370,4 +370,83 @@ function newGetDatas(value) {
     return value;
 }
 var newGetdatas = newGetDatas;
-newGetDatas(23);
+newGetdatas('23');
+/// 泛型类的展示
+var Users = /** @class */ (function () {
+    function Users() {
+    }
+    return Users;
+}());
+var MysQLdB = /** @class */ (function () {
+    function MysQLdB() {
+    }
+    // 使用user类控制传值的合法性
+    MysQLdB.prototype.add = function (user) {
+        console.log(user);
+        return true;
+    };
+    return MysQLdB;
+}());
+var Usc = new Users();
+Usc.username = '张三';
+Usc.passowrd = '1243';
+var DbServe = new MysQLdB();
+console.log(Usc.username);
+//传入所限制的类 
+DbServe.add(Usc);
+// 操作数据库的泛型类
+var MysqlT = /** @class */ (function () {
+    function MysqlT() {
+    }
+    MysqlT.prototype.add = function (info) {
+        console.log(info);
+        return true;
+    };
+    return MysqlT;
+}());
+// 给user表增加数据
+// 1.定义一个user类和数据库映射
+// 
+var Tuser = /** @class */ (function () {
+    function Tuser() {
+    }
+    return Tuser;
+}());
+var nU = new Tuser();
+nU.username = '李四';
+nU.password = 1223;
+// 将user作为泛型类传入
+var Tdb = new MysqlT();
+Tdb.add(nU);
+// 实现接口
+var MysqlDbi = /** @class */ (function () {
+    function MysqlDbi() {
+    }
+    MysqlDbi.prototype.add = function (info) {
+        throw new Error("Method not implemented.");
+    };
+    MysqlDbi.prototype.update = function (info, id) {
+        throw new Error("Method not implemented.");
+    };
+    MysqlDbi.prototype["delete"] = function (id) {
+        throw new Error("Method not implemented.");
+    };
+    MysqlDbi.prototype.get = function (id) {
+        throw new Error("Method not implemented.");
+    };
+    return MysqlDbi;
+}());
+//操作用户表,定义user类做映射
+var UserClass = /** @class */ (function () {
+    function UserClass() {
+    }
+    return UserClass;
+}());
+var newUsers = new UserClass();
+newUsers.username = '王五';
+newUsers.password = 'wewe';
+var newMysqldb = new MysqlDbi();
+newMysqldb.add(newUsers);
+// 关于模块
+//内部模块成为命名空间
+// 外部模块成为模块

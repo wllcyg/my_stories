@@ -486,3 +486,100 @@ function newGetDatas<T>(value:T):T{
 let newGetdatas:ConfigNewFn<string> = newGetDatas;
 
 newGetdatas('23');
+
+
+
+/// 泛型类的展示
+class Users {
+    username:string | undefined;
+    passowrd:string | undefined;
+
+}
+
+class MysQLdB {
+    // 使用user类控制传值的合法性
+    add(user:Users):boolean{
+        console.log(user);
+        
+        return true;
+    }
+}
+
+
+let Usc = new Users();
+Usc.username = '张三';
+Usc.passowrd = '1243';
+
+let DbServe = new MysQLdB();
+
+console.log(Usc.username);
+//传入所限制的类 
+DbServe.add(Usc)
+
+
+// 操作数据库的泛型类
+class MysqlT<T>{
+    add(info:T):boolean{
+        console.log(info);
+        return true;
+    }
+}
+
+// 给user表增加数据
+// 1.定义一个user类和数据库映射
+// 
+
+class Tuser{
+    username:string | undefined;
+    password:number | undefined;
+}
+
+let nU = new Tuser()
+nU.username = '李四';
+nU.password = 1223;
+// 将user作为泛型类传入
+let Tdb = new MysqlT<Tuser>();
+Tdb.add(nU)
+
+//定义一个操作数据库的类 ,支持各种数据库
+// 要求:add update delete get
+interface DBI<T>{
+    add(info:T):boolean;
+    update(info:T,id:number):boolean;
+    delete(id:null):boolean;
+    get(id:number):any[];
+}
+
+// 实现接口
+class MysqlDbi<T> implements DBI<T> {
+    add(info: T): boolean {
+        throw new Error("Method not implemented.");
+    }
+    update(info: T, id: number): boolean {
+        throw new Error("Method not implemented.");
+    }
+    delete(id: null): boolean {
+        throw new Error("Method not implemented.");
+    }
+    get(id: number): any[] {
+        throw new Error("Method not implemented.");
+    }
+    
+}
+
+//操作用户表,定义user类做映射
+class UserClass {
+    username:string | undefined;
+    password:string | undefined;
+}
+let newUsers = new UserClass()
+newUsers.username = '王五'
+newUsers.password = 'wewe'
+
+let newMysqldb = new MysqlDbi<UserClass>()
+newMysqldb.add(newUsers)
+
+// 关于模块
+//内部模块成为命名空间
+// 外部模块成为模块
+
